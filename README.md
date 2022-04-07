@@ -20,5 +20,6 @@ Create a user manual with helpful hints on how to succeed in the game
 
 
 
-Copy and paste this line, replace the Alt and Image sections with text and the URL to your image respectively
-![Alt text](Image URL)
+![06FA4EC0-CF95-49EA-A3F4-99650EA69F01_1_201_a](https://user-images.githubusercontent.com/97857514/162041355-9115e2db-648b-46f6-88c9-39e01abbe946.jpeg)
+
+![3AC95BAA-4E9E-4EC7-9428-14EEDE4547D3_1_201_a](https://user-images.githubusercontent.com/97857514/162041408-c8a4a70a-3a1b-4b46-a10c-ea3ad9e9feeb.jpeg)
