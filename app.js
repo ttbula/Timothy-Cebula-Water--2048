@@ -1,5 +1,5 @@
 // Setting up the board
-
+// console.log("Test")
 // The board is a square, width and height will be equal
 // The board has a slim border
 // Each square in the board will be slightly smaller than a quarter the size of the height and width 
