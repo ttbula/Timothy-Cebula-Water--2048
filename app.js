@@ -20,6 +20,12 @@
 
 // Assign each tile with an ID
 // Create an array within an array that will display the numbers on the board
+let game = [
+    [0, 0, 0, 0]
+    [0, 0, 0, 0]
+    [0, 0, 0, 0]
+    [0, 0, 0, 0]
+]
 // If number is 0 then that spot will be blank
 // addEventListener keyup, keydown, keyleft, keyright will respond to the movements
 

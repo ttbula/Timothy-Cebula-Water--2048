@@ -1,3 +1,22 @@
 h1 {
     text-align: center;
 }
+
+#board {
+    width: 500px;
+    height: 500px;
+    border: 7px solid rgb(200, 176, 144);
+    background-color: rgb(209, 187, 159);
+    display: flex;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.tile {
+    height: 110px;
+    width: 110px;
+    border: 7px solid black;
+    font-size: 50px;
+    text-align: center;
+
+}
