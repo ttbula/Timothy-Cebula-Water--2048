@@ -18,18 +18,53 @@
 // if number is 1024: slightly more brown shade of yellow with a white font
 // if number is 2048: darkest shade of yellow with a white font
 
+// Variables
+
+let rows = 4;
+let columns = 4;
+let game;
+let createDiv = document.createElement('div');
+let tiles = document.getElementsByTagName('tile');
+// let arrowLeft = document.
 // Assign each tile with an ID
 // Create an array within an array that will display the numbers on the board
-let game = [
-    [0, 0, 0, 0]
-    [0, 0, 0, 0]
-    [0, 0, 0, 0]
-    [0, 0, 0, 0]
+function gameBoard () { 
+   tiles = [
+    [2, 4, 8, 0].filter(Number),     //filter(Number) only filters out the 0's in the array
+    [0, 0, 0, 0].filter(Number),
+    [0, 16, 0, 0].filter(Number),
+    [0, 0, 2, 0].filter(Number),
 ]
-// If number is 0 then that spot will be blank
-// addEventListener keyup, keydown, keyleft, keyright will respond to the movements
+}
+// tiles.forEach(element => {
+    
+gameBoard()
+
 
 // Create a slide function that will modify the array with the new numbers
+
+// addEventListener keyup, keydown, keyleft, keyright will respond to the movements
+document.onkeydown = function (event) {
+    switch (event.keyCode) {
+       case 37:
+          console.log("Left");
+          break;
+       case 38:
+          console.log("Up");
+          break;
+       case 39:
+          console.log("Right");
+          break;
+       case 40:
+          console.log("Down");
+          break;
+    }
+ };
+// document.addEventListener('keydown', slide);
+// document.addEventListener('keyup', slide);
+// document.addEventListener('keyleft', slide);
+// document.addEventListener('keyright', slide);
+
 // The slide should push all numbers to whatever direction the user choses
 // If the index is 0 slide to the next index until it hits either: 
 //  The wall, a different number, or the same number

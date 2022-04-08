@@ -3,9 +3,9 @@ h1 {
 }
 
 #board {
-    width: 500px;
-    height: 500px;
-    border: 7px solid rgb(200, 176, 144);
+    width: 400px;
+    height: 400px;
+    border: 5px solid rgb(200, 176, 144);
     background-color: rgb(209, 187, 159);
     display: flex;
     margin: 0 auto;
@@ -13,10 +13,9 @@ h1 {
 }
 
 .tile {
-    height: 110px;
-    width: 110px;
-    border: 7px solid black;
+    height: 90px;
+    width: 90px;
+    border: 5px solid rgb(200, 176, 144);
     font-size: 50px;
     text-align: center;
-
 }
