@@ -23,25 +23,44 @@
 let rows = 4;
 let columns = 4;
 let game;
-let createDiv = document.createElement('div');
-let tiles = document.getElementsByTagName('tile');
+let board = document.getElementById('board');
+// let createDiv = document.createElement('div');
+let tiles = []
 // let arrowLeft = document.
 // Assign each tile with an ID
 // Create an array within an array that will display the numbers on the board
 function gameBoard () { 
-   tiles = [
-    [2, 4, 8, 0].filter(Number),     //filter(Number) only filters out the 0's in the array
-    [0, 0, 0, 0].filter(Number),
-    [0, 16, 0, 0].filter(Number),
-    [0, 0, 2, 0].filter(Number),
-]
+//    tiles = [
+//     [].filter(Number),     //filter(Number) only filters out the 0's in the array
+//     [].filter(Number),
+//     [].filter(Number),
+//     [].filter(Number),
+// ]
+
+for(let i=0; i < 16; i++) {
+    let createDiv = document.createElement('div');
+    createDiv.classList.add('tile')
+    createDiv.innerHTML = 0;
+    board.appendChild(createDiv)
+    tiles.push.createDiv
 }
-// tiles.forEach(element => {
-    
+generate()
+}
 gameBoard()
 
+// generate pick a random square 1-16 to set innerHTML to value if square already has value, retry
 
+function generate () {
+    let randomBlock = Math.floor(Math.random() * tiles.length)
+    console.log(randomBlock)
+    
+}
 // Create a slide function that will modify the array with the new numbers
+
+function slide () {
+
+}
+
 
 // addEventListener keyup, keydown, keyleft, keyright will respond to the movements
 document.onkeydown = function (event) {
