@@ -30,21 +30,17 @@ let tiles = []
 // Assign each tile with an ID
 // Create an array within an array that will display the numbers on the board
 function gameBoard () { 
-//    tiles = [
-//     [].filter(Number),     //filter(Number) only filters out the 0's in the array
-//     [].filter(Number),
-//     [].filter(Number),
-//     [].filter(Number),
-// ]
 
 for(let i=0; i < 16; i++) {
     let createDiv = document.createElement('div');
     createDiv.classList.add('tile')
     createDiv.innerHTML = 0;
     board.appendChild(createDiv)
-    tiles.push.createDiv
+    tiles.push(createDiv)
 }
 generate()
+generate() 
+// calling generate twice will generate two two's to start the game
 }
 gameBoard()
 
@@ -52,16 +48,79 @@ gameBoard()
 
 function generate () {
     let randomBlock = Math.floor(Math.random() * tiles.length)
-    console.log(randomBlock)
+    let percentage = Math.floor(Math.random() * 100)
+    if(percentage <= 90) {
+         newNum = 2
+    } else {
+        newNum = 4
+    }
+    // console.log(randomBlock)
+    console.log(tiles)
+    console.log(tiles[randomBlock].innerHTML)
+    if(tiles[randomBlock].innerHTML == 0) {
+        tiles[randomBlock].innerHTML = newNum
+    } else {
+        generate()
+    }
     
 }
 // Create a slide function that will modify the array with the new numbers
 
-function slide () {
-
+function changeColor () {
+    for(let i = 0; i < tiles.length; i++) {
+        switch (parseInt(tiles[i].innerHTML)) {
+        case 0:
+            tiles[i].style.backgroundColor = "#D1BB9F";
+            tiles[i].style.color = "#D1BB9F"
+            break;
+        case 2:
+            tiles[i].style.backgroundColor = "blue";
+            tiles[i].style.color = "white"
+            break;
+        case 4:
+            tiles[i].style.backgroundColor = "blue";
+            tiles[i].style.color = "white"
+            break;
+        case 8:
+            tiles[i].style.backgroundColor = "blue";
+            tiles[i].style.color = "white"
+            break;
+        case 16:
+            tiles[i].style.backgroundColor = "blue";
+            tiles[i].style.color = "white"
+            break;
+        case 32:
+            tiles[i].style.backgroundColor = "blue";
+            tiles[i].style.color = "white"
+            break;
+        case 64:
+            tiles[i].style.backgroundColor = "blue";
+            tiles[i].style.color = "white"
+            break;
+        case 128:
+            tiles[i].style.backgroundColor = "blue";
+            tiles[i].style.color = "white"
+            break;
+        case 256:
+            tiles[i].style.backgroundColor = "blue";
+            tiles[i].style.color = "white"
+            break;
+        case 512:
+            tiles[i].style.backgroundColor = "blue";
+            tiles[i].style.color = "white"
+            break;
+        case 1024:
+            tiles[i].style.backgroundColor = "blue";
+            tiles[i].style.color = "white"
+            break;
+        case 2048:
+            tiles[i].style.backgroundColor = "blue";
+            tiles[i].style.color = "white"
+            break;
+    }
 }
-
-
+}
+changeColor()
 // addEventListener keyup, keydown, keyleft, keyright will respond to the movements
 document.onkeydown = function (event) {
     switch (event.keyCode) {
