@@ -126,15 +126,21 @@ function changeColor () {
                     case 37:
                         slideLeft()
                         console.log("Left");
+                        generate()
                         break;
                     case 38:
+                        slideUp()
+                        generate()
                         console.log("Up");
                         break;
                     case 39:
                         slideRight()
+                        generate()
                         console.log("Right");
                         break;
                     case 40:
+                        slideDown()
+                        generate()
                         console.log("Down");
                         break;
                     }
@@ -153,11 +159,9 @@ function changeColor () {
            }
            
            function checkPositions () {
-               let positions = {
-
-               }
+               let positions = []
                for(let i = 0; i < tiles.length; i++) {
-                    console.log(tiles[i].innerHTML)
+                    // console.log(tiles[i].innerHTML)
                     if(tiles[i].innerHTML !== '0') {
                       let value = parseInt(tiles[i].innerHTML)
                     
@@ -173,26 +177,91 @@ function changeColor () {
                
            }
 
-           function multiplyRows () {
-               
-
-
+           function removeOnes (nums, positions) {
+               for(let i = 0; i < nums.length; i++) {
+                   let current = positions[nums[i]]
+                   console.log(current)
+                if(current === 1) {
+               nums.splice(i, 1)
+               // splices each value  containing 1
            }
-        
-           function slideLeft() {
-               let positions = checkPositions()
-                tiles[0].innerHTML = positions[0] * positions[1] * positions[2] * positions[3]
-                tiles[4].innerHTML = positions[4] * positions[5] * positions[6] * positions[7]
-                tiles[8].innerHTML = positions[8] * positions[9] * positions[10] * positions[11]
-                tiles[12].innerHTML = positions[12] * positions[13] * positions[14] * positions[15]
+        }
+        return nums
+    }
 
-                for(let i  = 0; i < tiles.length; i++) {
-                    if(i % 4 !== 0) {
-                        tiles[i].innerHTML = 0
-                        positions[i] = 1
-                    }
+           function combineNums (nums) {
+               // grabbing positons of each one
+               // creating array of each position
+               let positions = checkPositions()
+                // if it has value, we assign it with the value
+            }
+            let index = null
+            for(let i = 0; i < nums.length; i++) {
+                let currentNum = positions[nums[i]]
+
+                if(currentNum !== 1) {
+                    index = i
+                    break;
+                }
+            }
+
+            let placeholder = 0
+            if(index && index !== nums.length - 1) {
+                console.log('hey')
+                for(let i = index + 1; i < nums.length ; i++) {
+                  
+                   
+                    let nextNum = positions[nums[i]]
+                    console.log(typeof nextNum)
+                    console.log(nextNum)
+                    console.log(positions[nums[index]])
+                        if(positions[nums[index]] === nextNum && nextNum !== 1) {
+                            console.log('ANYTHING')
+                            let value = positions[nums[index]] + nextNum
+                            tiles[nums[placeholder]].innerHTML = value 
+                            placeholder++
+                            tiles[nums[i]].innerHTML = 0
+                            tiles[nums[index]].innerHTML = 0
+                            
+                            changeColor()
+                            // nums.splice(i, 1)
+                            index++
+    
+                        } else if(positions[nums[index]] !== nextNum && nextNum !== 1) {
+                            tiles[nums[placeholder]].innerHTML = positions[nums[index]]
+                            tiles[nums[index]].innerHTML = 0
+                            changeColor() 
+                            placeholder++
+                            index++
+                        }
+    
+                    // [4, 4, 8]
+    
                 }
 
+            } 
+            
+           }
+
+
+           function slideLeft() {
+               //passing in index of each row, looping through every cell
+            
+                combineNums([0, 1, 2, 3])
+                // row 1
+                combineNums([4, 5, 6, 7])
+                // row 2
+                combineNums([8, 9, 10, 11])
+                // row 3
+                combineNums([12, 13, 14, 15])
+              // row 4
+            //   for(let i  = 0; i < tiles.length; i++) {
+            //     if(i % 4 !== 0) {
+            //         tiles[i].innerHTML = 0
+            //         positions[i] = 1
+            //     }
+            // }
+                generate()
                 changeColor()
             }    
 
@@ -204,20 +273,47 @@ function changeColor () {
                 tiles[15].innerHTML = positions[12] * positions[13] * positions[14] * positions[15]
 
                 for(let i  = 0; i < tiles.length; i++) {
-                    if(i % 4 !== 0) {
+                    if(i % 4 !== 3) {
                         tiles[i].innerHTML = 0
                         positions[i] = 1
                     }
                 }
-
+                generate()
                 changeColor()
             }    
             
             function slideUp() {
-                
+                let positions = checkPositions()
+                tiles[0].innerHTML = positions[0] * positions[4] * positions[8] * positions[12]
+                tiles[1].innerHTML = positions[1] * positions[5] * positions[9] * positions[13]
+                tiles[2].innerHTML = positions[2] * positions[6] * positions[10] * positions[14]
+                tiles[3].innerHTML = positions[3] * positions[7] * positions[11] * positions[15]
+
+                for(let i  = 0; i < tiles.length; i++) {
+                    if(i >= 4) {
+                        tiles[i].innerHTML = 0
+                        positions[i] = 1
+                    }
+                }
+                generate()
+                changeColor()
             }    
+            
             function slideDown() {
-                
+                let positions = checkPositions()
+                tiles[12].innerHTML = positions[0] * positions[1] * positions[2] * positions[3]
+                tiles[13].innerHTML = positions[4] * positions[5] * positions[6] * positions[7]
+                tiles[14].innerHTML = positions[8] * positions[9] * positions[10] * positions[11]
+                tiles[15].innerHTML = positions[12] * positions[13] * positions[14] * positions[15]
+
+                for(let i  = 0; i < tiles.length; i++) {
+                    if(i <= 12) {
+                        tiles[i].innerHTML = 0
+                        positions[i] = 1
+                    }
+                }
+                generate()
+                changeColor()
             }    
 // Create a slide function that will modify the array with the new numbers
   // The slide should push all numbers to whatever direction the user choses
