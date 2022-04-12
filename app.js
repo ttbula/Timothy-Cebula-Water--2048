@@ -189,12 +189,27 @@ function changeColor () {
         return nums
     }
 
+        function count (nums, positions) {
+            let counting = 0
+            for(let i = 0; i < nums.length; i++) {
+                if(positions[nums[i]] !== 1) {
+                    counting++
+                }
+            } 
+            return counting;
+        }
+
            function combineNums (nums) {
                // grabbing positons of each one
                // creating array of each position
                let positions = checkPositions()
                 // if it has value, we assign it with the value
-            }
+                let placeholder = 0
+            let numCount = count(nums, positions)
+            console.log(numCount)
+            if(numCount === 0) {
+                return
+            } 
             let index = null
             for(let i = 0; i < nums.length; i++) {
                 let currentNum = positions[nums[i]]
@@ -204,35 +219,47 @@ function changeColor () {
                     break;
                 }
             }
-
-            let placeholder = 0
-            if(index && index !== nums.length - 1) {
+            
+            
+            if(numCount === 1 && index !== null) {
+                console.log('============================ HERE ===================================')
+                tiles[nums[0]].innerHTML = positions[nums[index]]
+                if(index !== 0) {
+                    console.log('============================ THERE ===================================')
+                    tiles[nums[index]].innerHTML = 0
+                }
+            } else {
                 console.log('hey')
                 for(let i = index + 1; i < nums.length ; i++) {
-                  
+                  let currNum = positions[nums[index]]
                    
                     let nextNum = positions[nums[i]]
                     console.log(typeof nextNum)
                     console.log(nextNum)
-                    console.log(positions[nums[index]])
-                        if(positions[nums[index]] === nextNum && nextNum !== 1) {
+                    console.log(currNum)
+                        if(currNum === nextNum && nextNum !== 1) {
                             console.log('ANYTHING')
-                            let value = positions[nums[index]] + nextNum
+                            let value = currNum + nextNum
                             tiles[nums[placeholder]].innerHTML = value 
                             placeholder++
                             tiles[nums[i]].innerHTML = 0
-                            tiles[nums[index]].innerHTML = 0
+                            if(index !== placeholder) {
+                                tiles[nums[index]].innerHTML = 0
+
+                            }
                             
                             changeColor()
                             // nums.splice(i, 1)
                             index++
     
-                        } else if(positions[nums[index]] !== nextNum && nextNum !== 1) {
-                            tiles[nums[placeholder]].innerHTML = positions[nums[index]]
+                        } else if(currNum !== nextNum && nextNum !== 1) {
+                            tiles[nums[placeholder]].innerHTML = currNum
                             tiles[nums[index]].innerHTML = 0
                             changeColor() 
                             placeholder++
-                            index++
+                            index = i
+                        } else {
+                            tiles[nums[placeholder]].innerHTML = currNum
                         }
     
                     // [4, 4, 8]
@@ -242,7 +269,7 @@ function changeColor () {
             } 
             
            }
-
+        
 
            function slideLeft() {
                //passing in index of each row, looping through every cell
@@ -261,8 +288,9 @@ function changeColor () {
             //         positions[i] = 1
             //     }
             // }
-                generate()
+                
                 changeColor()
+                generate()
             }    
 
             function slideRight() {
