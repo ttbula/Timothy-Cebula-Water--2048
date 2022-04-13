@@ -55,8 +55,8 @@ function generate () {
         newNum = 4
     }
     // console.log(randomBlock)
-    console.log(tiles)
-    console.log(tiles[randomBlock].innerHTML)
+    // console.log(tiles)
+    // console.log(tiles[randomBlock].innerHTML)
     if(tiles[randomBlock].innerHTML == 0) {
         tiles[randomBlock].innerHTML = newNum
     } else {
@@ -125,22 +125,36 @@ function changeColor () {
                 switch (event.keyCode) {
                     case 37:
                         slideLeft()
+                        combineRow()
+                        slideLeft()
                         console.log("Left");
                         generate()
+                        changeColor()
+
+                        
                         break;
                     case 38:
                         slideUp()
+                        combineColumn()
+                        slideUp()
                         generate()
+                        changeColor()
                         console.log("Up");
                         break;
                     case 39:
                         slideRight()
-                        generate()
+                        combineRow()
+                        slideRight()
                         console.log("Right");
+                        generate()
+                        changeColor()
                         break;
                     case 40:
                         slideDown()
+                        combineColumn()
+                        slideDown()
                         generate()
+                        changeColor()
                         console.log("Down");
                         break;
                     }
@@ -199,6 +213,30 @@ function changeColor () {
             return counting;
         }
 
+
+        function combineRow() {
+            for (let i =0; i < 15; i++) {
+              if (tiles[i].innerHTML === tiles[i +1].innerHTML) {
+                let combinedTotal = parseInt(tiles[i].innerHTML) + parseInt(tiles[i +1].innerHTML)
+                tiles[i].innerHTML = combinedTotal
+                tiles[i +1].innerHTML = 0
+                // score += combinedTotal
+                // htmlScore.innerHTML = score
+              }
+            }
+            // checkForWin()
+          }
+
+          function combineColumn() {
+              for (let i = 0; i < 12; i++) {
+                  if (tiles[i].innerHTML === tiles[i + columns].innerHTML) {
+                    let combinedTotal = parseInt(tiles[i].innerHTML) + parseInt(tiles[i + columns].innerHTML)
+                    tiles[i].innerHTML = combinedTotal
+                    tiles[i + columns].innerHTML = 0
+                  }
+              }
+          }
+
            function combineNums (nums) {
                // grabbing positons of each one
                // creating array of each position
@@ -219,6 +257,9 @@ function changeColor () {
                     break;
                 }
             }
+        
+
+            
             
             
             if(numCount === 1 && index !== null) {
@@ -268,81 +309,157 @@ function changeColor () {
 
             } 
             
-           }
+        }
         
 
            function slideLeft() {
                //passing in index of each row, looping through every cell
             
-                combineNums([0, 1, 2, 3])
+                combineRow([0, 1, 2, 3])
                 // row 1
-                combineNums([4, 5, 6, 7])
+                combineRow([4, 5, 6, 7])
                 // row 2
-                combineNums([8, 9, 10, 11])
+                combineRow([8, 9, 10, 11])
                 // row 3
-                combineNums([12, 13, 14, 15])
+                combineRow([12, 13, 14, 15])
               // row 4
-            //   for(let i  = 0; i < tiles.length; i++) {
-            //     if(i % 4 !== 0) {
-            //         tiles[i].innerHTML = 0
-            //         positions[i] = 1
-            //     }
-            // }
+          
+            for (let i=0; i < 16; i++) {
+                if (i % 4 === 0) {
+                  let one = tiles[i].innerHTML
+                  let two = tiles[i+1].innerHTML
+                  let three = tiles[i+2].innerHTML
+                  let four = tiles[i+3].innerHTML
+                  let row = [parseInt(one), parseInt(two), parseInt(three), parseInt(four)]
+                  let filteredRow = row.filter(num => num)
+      let missing = 4 - filteredRow.length
+      let zeros = Array(missing).fill(0)
+      let newRow = filteredRow.concat(zeros)
+      tiles[i].innerHTML = newRow[0]
+      tiles[i +1].innerHTML = newRow[1]
+      tiles[i +2].innerHTML = newRow[2]
+      tiles[i +3].innerHTML = newRow[3]
+                console.log(newRow)
                 
-                changeColor()
-                generate()
-            }    
+                
+            }   
 
+            
+        }
+    }
             function slideRight() {
-                let positions = checkPositions()
-                tiles[3].innerHTML = positions[0] * positions[1] * positions[2] * positions[3]
-                tiles[7].innerHTML = positions[4] * positions[5] * positions[6] * positions[7]
-                tiles[11].innerHTML = positions[8] * positions[9] * positions[10] * positions[11]
-                tiles[15].innerHTML = positions[12] * positions[13] * positions[14] * positions[15]
-
-                for(let i  = 0; i < tiles.length; i++) {
-                    if(i % 4 !== 3) {
-                        tiles[i].innerHTML = 0
-                        positions[i] = 1
-                    }
-                }
-                generate()
-                changeColor()
-            }    
+                combineRow([0, 1, 2, 3])
+                // row 1
+                combineRow([4, 5, 6, 7])
+                // row 2
+                combineRow([8, 9, 10, 11])
+                // row 3
+                combineRow([12, 13, 14, 15])
+              // row 4
+          
+            for (let i=0; i < 16; i++) {
+                if (i % 4 === 0) {
+                  let one = tiles[i].innerHTML
+                  let two = tiles[i+1].innerHTML
+                  let three = tiles[i+2].innerHTML
+                  let four = tiles[i+3].innerHTML
+                  let row = [parseInt(one), parseInt(two), parseInt(three), parseInt(four)]
+                  let filteredRow = row.filter(num => num)
+      let missing = 4 - filteredRow.length
+      // removing and replacing your zeros with values and moving the zeros to the empty slots
+      let zeros = Array(missing).fill(0)
+      let newRow = zeros.concat(filteredRow)
+      tiles[i].innerHTML = newRow[0]
+      tiles[i +1].innerHTML = newRow[1]
+      tiles[i +2].innerHTML = newRow[2]
+      tiles[i +3].innerHTML = newRow[3]
+                
+            } 
             
+            }
+            }
+            
+// filter will remove all zeroes from array leaving all non-zero numbers
+        // determine if how many non-zeroes numbers we have in the new filtered array
+        // create an array of size 'missing' with all zeroes
+        // concatenate the zeroes array with the filteredRow array
+        // 0,2,0,4 becomes 2,4 .. which means the two values on the right will be 2 and 4
+        // new array and values would be 0,0,2,4
+       
+
+
             function slideUp() {
-                let positions = checkPositions()
-                tiles[0].innerHTML = positions[0] * positions[4] * positions[8] * positions[12]
-                tiles[1].innerHTML = positions[1] * positions[5] * positions[9] * positions[13]
-                tiles[2].innerHTML = positions[2] * positions[6] * positions[10] * positions[14]
-                tiles[3].innerHTML = positions[3] * positions[7] * positions[11] * positions[15]
-
-                for(let i  = 0; i < tiles.length; i++) {
-                    if(i >= 4) {
-                        tiles[i].innerHTML = 0
-                        positions[i] = 1
-                    }
-                }
-                generate()
-                changeColor()
-            }    
-            
+                //passing in index of each row, looping through every cell
+             
+            //      combineRow([0, 1, 2, 3])
+            //      // row 1
+            //      combineRow([4, 5, 6, 7])
+            //      // row 2
+            //      combineRow([8, 9, 10, 11])
+            //      // row 3
+            //      combineRow([12, 13, 14, 15])
+            //    // row 4
+           
+             for (let i=0; i < 4; i++) {
+                 
+                   let one = tiles[i].innerHTML
+                   let two = tiles[i+ columns].innerHTML
+                   let three = tiles[i+ (columns * 2)].innerHTML
+                   let four = tiles[i+ (columns * 3)].innerHTML
+                   let row = [parseInt(one), parseInt(two), parseInt(three), parseInt(four)]
+                   let filteredRow = row.filter(num => num)
+       let missing = 4 - filteredRow.length
+       let zeros = Array(missing).fill(0)
+       let newRow = filteredRow.concat(zeros)
+       tiles[i].innerHTML = newRow[0]
+       tiles[i + columns].innerHTML = newRow[1]
+       tiles[i + (columns * 2)].innerHTML = newRow[2]
+       tiles[i + (columns * 3)].innerHTML = newRow[3]
+                 console.log(newRow)
+                 
+                 
+             }   
+ 
+             
+         }
             function slideDown() {
-                let positions = checkPositions()
-                tiles[12].innerHTML = positions[0] * positions[1] * positions[2] * positions[3]
-                tiles[13].innerHTML = positions[4] * positions[5] * positions[6] * positions[7]
-                tiles[14].innerHTML = positions[8] * positions[9] * positions[10] * positions[11]
-                tiles[15].innerHTML = positions[12] * positions[13] * positions[14] * positions[15]
-
-                for(let i  = 0; i < tiles.length; i++) {
-                    if(i <= 12) {
-                        tiles[i].innerHTML = 0
-                        positions[i] = 1
-                    }
-                }
-                generate()
-                changeColor()
-            }    
+                //passing in index of each row, looping through every cell
+             
+                 combineRow([0, 1, 2, 3])
+                 // row 1
+                 combineRow([4, 5, 6, 7])
+                 // row 2
+                 combineRow([8, 9, 10, 11])
+                 // row 3
+                 combineRow([12, 13, 14, 15])
+               // row 4
+           
+             for (let i=0; i < 4; i++) {
+                 
+                   let one = tiles[i].innerHTML
+                   let two = tiles[i+ columns].innerHTML
+                   let three = tiles[i+ (columns * 2)].innerHTML
+                   let four = tiles[i+ (columns * 3)].innerHTML
+                   let row = [parseInt(one), parseInt(two), parseInt(three), parseInt(four)]
+                   let filteredRow = row.filter(num => num)
+       let missing = 4 - filteredRow.length
+       let zeros = Array(missing).fill(0)
+       let newRow = zeros.concat(filteredRow)
+       tiles[i].innerHTML = newRow[0]
+       tiles[i + columns].innerHTML = newRow[1]
+       tiles[i + (columns * 2)].innerHTML = newRow[2]
+       tiles[i + (columns * 3)].innerHTML = newRow[3]
+                 console.log(newRow)
+                 
+                 
+             }   
+ 
+             
+         }
+     
+                
+        
+         
 // Create a slide function that will modify the array with the new numbers
   // The slide should push all numbers to whatever direction the user choses
 // If the index is 0 slide to the next index until it hits either: 
